@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <div class="wrapper">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="sidebar">
+            <div class="sidebarinner">
+                <h2>The Ink Well</h2>
+                <p>This is my sidebar...</p>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

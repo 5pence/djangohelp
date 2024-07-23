@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Lora&display=swap');
+
+/* 
+#001b2e
+#1d3f58
+#537692
+#b3cde4
+#eef3f9 
+*/
+
+body { 
+    background-color: #001b2e;
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, sans-serif; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+
+a { 
+    color: #b3cde4;
+    text-decoration: none; 
+    letter-spacing: 0.03em;
+}
+
+h1 { 
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: normal;
+    color: #eef3f9;
+    border-bottom: 1px solid #bbb;
+    padding: 0 0 10px 0;
+    letter-spacing: 0.03em;
+}
+
+h2 {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: normal;
+    color: #b3cde4;
+    margin: 30px 0 0;
+    letter-spacing: 0.03em;
+}
+
+.content { 
+    flex: 1;
+    padding: 0 30px;
+}
+
+.sidebar { 
+    width: 33%;
+    border-left: 1px solid #537692;
+    background: #1d3f58;
+}
+
+.sidebarinner {
+    padding: 1rem 2rem;
+}
+
+p.date { 
+    color: #ccc;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
+p {
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #eef3f9;
+    font-size: 1.28rem;
+    line-height: 150%;
+    letter-spacing: 0.015em;
+}
+
+.left {
+    float: left;
+    margin-right: 10px;
+}
+
+/* pagination */
+.pagination { 
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: bold;
+    margin: 40px 0; 
+    color: #b3cde4;
+}
+
+.current {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: bold;
+    margin: 40px 0; 
+    color: #eef3f9;
+}
+
+/* forms */
+label { 
+    float: left;
+    clear: both;
+    color: #eef3f9;
+    margin-bottom: 4px; 
+}
+
+input, textarea { 
+    clear: both;
+    float: left;
+    margin: 0 0 10px;
+    background: #1d3f58 !important;
+    border: 0;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #eef3f9;
+}
+
+input[type=submit] {
+    font-weight: bold;
+    background: #00abff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase; 
+}
+
+.errorlist { 
+    color: #cc0033;
+    float: left;
+    clear: both;
+    padding-left: 10px; 
+}
+
+/* comments */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #537692;
+}
+
+.comment .info {
+    font-weight: bold;
+    font-size: 12px;
+    color: #666;
+}

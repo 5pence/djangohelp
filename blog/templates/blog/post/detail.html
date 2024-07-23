@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% load humanize %} 
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">
+        Published {{ post.created_on|naturalday }} by {{ post.author }}
+    </p>
+    {{ post.body|linebreaks }}
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+    {% endwith %}
+    {% for comment in comments %}
+    <div class="comment">
+      <p class="info">
+        Comment {{ forloop.counter }} by {{ comment.name }}
+        {{ comment.created_on }}
+      </p>
+      {{ comment.body|linebreaks }}
+    </div>
+  {% empty %}
+    <p>There are no comments yet.</p>
+  {% endfor %}
+  {% include "blog/post/includes/comment_form.html" %}
+{% endblock %}
+
+{% comment %} the {% with %} template tag is useful for avoiding hitting the 
+database or accessing expensive methods multiple times  {% endcomment %}

@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+
+{% block title %}My Blog{% endblock %}
+
+{% load humanize %} 
+
+{% block content %}
+    <h1>The Inkwell Collective</h1>
+    {% for post in posts  %}
+        <h2>
+            <a href="{{ post.get_absolute_url }}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p class='date'>
+            Published {{ post.created_on|naturalday }} by {{ post.author }}
+        </p>
+        <p>
+            {{ post.body|truncatewords:30|linebreaks }}
+        </p>
+    {% endfor %}
+    {% include "pagination.html" with page=page_obj %}
+{% endblock %}
+
