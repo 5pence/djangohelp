@@ -5,7 +5,7 @@
 {% load humanize %} 
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
+    <h2>{{ post.title }}</h2>
     <p class="date">
         Published {{ post.created_on|naturalday }} by {{ post.author }}
     </p>
@@ -17,15 +17,23 @@
     {% for comment in comments %}
     <div class="comment">
       <p class="info">
-        Comment {{ forloop.counter }} by {{ comment.name }}
+        Comment {{ forloop.counter }} by {{ comment.user }}
         {{ comment.created_on }}
       </p>
       {{ comment.body|linebreaks }}
+      {% if comment.user == user %}
+        <a href="{% url 'blog:edit_comment' comment.id %}">Edit</a>
+        <a href="{% url 'blog:delete_comment' comment.id %}">Delete</a>
+    {% endif %}
     </div>
   {% empty %}
     <p>There are no comments yet.</p>
   {% endfor %}
-  {% include "blog/post/includes/comment_form.html" %}
+  {% if user.is_authenticated %}
+    {% include "blog/post/includes/comment_form.html" %}
+  {% else %}
+    <p>Please log in to leave a comment.</p>
+  {% endif %}
 {% endblock %}
 
 {% comment %} the {% with %} template tag is useful for avoiding hitting the 

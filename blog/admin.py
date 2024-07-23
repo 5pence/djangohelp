@@ -7,9 +7,9 @@ from .models import Comment, Post
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'post', 'created_on', 'is_active']
+    list_display = ['user', 'post', 'created_on', 'is_active']
     list_filter = ['is_active', 'created_on', 'updated_on']
-    search_fields = ['name', 'email', 'body']
+    search_fields = ['user', 'post', 'body']
 
 
 @admin.register(Post)

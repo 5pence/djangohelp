@@ -10,13 +10,23 @@
   <body>
     <div class="wrapper">
         <div class="content">
+            <h1>The Inkwell Collective</h1>
             {% block content %}
             {% endblock %}
         </div>
         <div class="sidebar">
             <div class="sidebarinner">
-                <h2>The Ink Well</h2>
-                <p>This is my sidebar...</p>
+                <!-- base.html or relevant template -->
+                {% if user.is_authenticated %}
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="nobutton">Logout</button>
+                </form>
+                {% else %}
+                    <a class="nobutton" href="{% url 'login' %}">Login |</a> 
+                    <a class="nobutton" href="{% url 'register' %}"> Register</a>
+                {% endif %}
+                <p>Welcome back {{ user.username }}, we've been expecting you!</p>
             </div>
         </div>
     </div>

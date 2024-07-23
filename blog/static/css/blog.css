@@ -66,6 +66,19 @@ h2 {
     padding: 1rem 2rem;
 }
 
+.nobutton {
+    background: none;
+    border: none;
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: normal;
+    color: #b3cde4;
+    letter-spacing: 0.03em;
+    font-size: 1.3rem;
+    padding: 1rem 0;
+}    
+
 p.date { 
     color: #ccc;
     font-family: "Lora", serif;

@@ -1,9 +1,10 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 from .forms import CommentForm
-from .models import Post
+from .models import Post, Comment
 
 
 def post_list(request):
@@ -72,29 +73,69 @@ class PostListView(ListView):
     template_name = 'blog/post/list.html'
 
 
+@login_required
 @require_POST
 def post_comment(request, post_id):
-    post = get_object_or_404(
-        Post,
-        id=post_id,
-        status=Post.Status.PUBLISHED
-    )
-    comment = None
-    # A comment was posted
+    post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     form = CommentForm(data=request.POST)
     if form.is_valid():
-        # Create a Comment object without saving it to the database
         comment = form.save(commit=False)
-        # Assign the post to the comment
         comment.post = post
-        # Save the comment to the database
+        comment.user = request.user
         comment.save()
+        return redirect(
+            'blog:post_detail',
+            year=post.created_on.year,
+            month=post.created_on.month,
+            day=post.created_on.day,
+            post=post.slug
+        )
     return render(
         request,
-        'blog/post/comment.html',
-        {
-            'post': post,
-            'form': form,
-            'comment': comment
-        },
+        'blog/post/detail.html',
+        {'post': post, 'form': form}
+    )
+
+
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect(
+                'blog:post_detail',
+                year=comment.post.created_on.year,
+                month=comment.post.created_on.month,
+                day=comment.post.created_on.day,
+                post=comment.post.slug
+            )
+    else:
+        form = CommentForm(instance=comment)
+    return render(
+        request,
+        'blog/post/comment/edit_comment.html',
+        {'form': form}
+    )
+
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+    post = comment.post
+    if request.method == 'POST':
+        comment.delete()
+        return redirect(
+            'blog:post_detail',
+            year=post.created_on.year,
+            month=post.created_on.month,
+            day=post.created_on.day,
+            post=post.slug
+        )
+    return render(
+        request,
+        'blog/post/comment/delete_comment.html',
+        {'comment': comment}
     )

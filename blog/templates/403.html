@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% load humanize %} 
+
+{% block content %}
+    <h2>Forbidden</h2>
+    <p>You can't edit someone else's comment!</p>
+{% endblock %}
