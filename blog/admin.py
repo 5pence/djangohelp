@@ -18,7 +18,6 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['status', 'created_on', 'updated_on', 'author']
     search_fields = ['title', 'body']
     prepopulated_fields = {'slug': ('title',)}
-    raw_id_fields = ['author']
     date_hierarchy = 'created_on'
     ordering = ['status', 'created_on']
     show_facets = admin.ShowFacets.ALWAYS

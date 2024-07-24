@@ -2,7 +2,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Count
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class PublishedManager(models.Manager):
@@ -15,6 +17,10 @@ class PublishedManager(models.Manager):
 
     def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
+
+    def most_commented(self):
+        return self.get_queryset().annotate(comment_count=Count(
+            'comments')).order_by('-comment_count')[:3]
 
 
 class Post(models.Model):
@@ -34,6 +40,7 @@ class Post(models.Model):
         related_name='blog_posts'
     )
     body = models.TextField()
+    tags = TaggableManager()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.CharField(
@@ -59,7 +66,7 @@ class Post(models.Model):
         ]
 
     def __str__(self):
-        return self.title
+        return f'{self.title} by {self.author.username}'
 
     def get_absolute_url(self):
         return reverse(
@@ -79,7 +86,10 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name="comments"
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     body = models.TextField(max_length=800)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -92,4 +102,4 @@ class Comment(models.Model):
         ]
 
     def __str__(self):
-        return f'Comment by {self.name} on {self.post}'
+        return f'Comment by {self.user} on {self.post}'

@@ -4,31 +4,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
     <div class="wrapper">
         <div class="content">
-            <h1>The Inkwell Collective</h1>
+            <h1>
+                <a href="{% url 'blog:post_list' %}">The Inkwell Collective</a>
+            </h1>
             {% block content %}
             {% endblock %}
         </div>
         <div class="sidebar">
             <div class="sidebarinner">
-                <!-- base.html or relevant template -->
-                {% if user.is_authenticated %}
-                <form id="logout-form" method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="nobutton">Logout</button>
-                </form>
-                {% else %}
-                    <a class="nobutton" href="{% url 'login' %}">Login |</a> 
-                    <a class="nobutton" href="{% url 'register' %}"> Register</a>
-                {% endif %}
-                <p>Welcome back {{ user.username }}, we've been expecting you!</p>
+                <div class="auth-links">
+                    {% if user.is_authenticated %}
+                    <div class="auth-message">
+                        <p>Welcome back, {{ user.username }}!</p>
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nobutton">Logout</button>
+                        </form>
+                    </div>
+                    {% else %}
+                        <div>
+                            <a class="nobutton" href="{% url 'login' %}">Login</a> | 
+                            <a class="nobutton" href="{% url 'register' %}">Register</a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <h2>Most Commented Posts</h2>
+                <div class="most-commented">
+                    {% for post in most_commented_posts %}
+                        <a href="{{ post.get_absolute_url }}" class="most-commented-link">
+                            {{ post.title }}
+                            <span class="comment-count">
+                                <i class="fas fa-comment"></i> {{ post.comment_count }}
+                            </span>
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        
+        
     </div>
   </body>
 </html>

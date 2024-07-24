@@ -18,12 +18,12 @@
     <div class="comment">
       <p class="info">
         Comment {{ forloop.counter }} by {{ comment.user }}
-        {{ comment.created_on }}
+        {{ comment.created_on|naturaltime }}
       </p>
       {{ comment.body|linebreaks }}
       {% if comment.user == user %}
-        <a href="{% url 'blog:edit_comment' comment.id %}">Edit</a>
-        <a href="{% url 'blog:delete_comment' comment.id %}">Delete</a>
+        <a href="{% url 'blog:edit_comment' comment.id %}">Edit |</a>
+        <a href="{% url 'blog:delete_comment' comment.id %}"> Delete</a>
     {% endif %}
     </div>
   {% empty %}

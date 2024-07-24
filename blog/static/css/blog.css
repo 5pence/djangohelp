@@ -58,12 +58,29 @@ h2 {
 
 .sidebar { 
     width: 33%;
-    border-left: 1px solid #537692;
-    background: #1d3f58;
+    border-left: 1px solid #1d3f58;
+    background-color: rgba(83, 118, 146, 0.1);
 }
 
 .sidebarinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 1rem 2rem;
+}
+
+.auth-message {
+    text-align: right;
+}
+
+.auth-message p {
+    display: inline;
+    margin-right: 10px;
+    font-family: "Cinzel", serif;
+    font-weight: normal;
+    color: #b3cde4;
+    letter-spacing: 0.03em;
+    font-size: 1.3rem;
 }
 
 .nobutton {
@@ -78,6 +95,49 @@ h2 {
     font-size: 1.3rem;
     padding: 1rem 0;
 }    
+
+.auth-links {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.auth-links form {
+    display: inline;
+}
+
+.auth-links a,
+.auth-links button {
+    color: #b3cde4;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.auth-links button {
+    background: none;
+    border: none;
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-weight: normal;
+    color: #b3cde4;
+    letter-spacing: 0.03em;
+    font-size: 1.3rem;
+    padding: 1rem 0;
+    cursor: pointer;
+}
+
+.tag-pill {
+    display: inline-block;
+    padding: 0.02em 0.7em;
+    margin: 0.2em;
+    background-color: rgba(83, 118, 146, 0.3);
+    color: white;
+    border-radius: 25px;
+    border: 1px solid #537692;
+    font-size: 0.7em;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
 
 p.date { 
     color: #ccc;
@@ -168,4 +228,39 @@ input[type=submit] {
     font-weight: bold;
     font-size: 12px;
     color: #666;
+}
+
+/* most commented posts */
+.most-commented {
+    margin-top: 20px;
+}
+
+.most-commented-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(83, 118, 146, 0.3);
+    color: #b3cde4;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+}
+
+.most-commented-link:hover {
+    background-color: #537692;
+    color: #eef3f9;
+}
+
+.comment-count {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #eef3f9;
+}
+
+.comment-count i {
+    margin-right: 5px;
 }

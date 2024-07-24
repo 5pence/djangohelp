@@ -11,6 +11,11 @@
                 {{ post.title }}
             </a>
         </h2>
+        <p class="tags">
+            {% for tag in post.tags.all %}
+                <a href="{% url 'blog:post_list_by_tag' tag.slug %}" class="tag-pill">{{ tag.name }}</a>
+            {% endfor %}
+        </p>
         <p class='date'>
             Published {{ post.created_on|naturalday }} by {{ post.author }}
         </p>

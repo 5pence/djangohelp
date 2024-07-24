@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
+from taggit.models import Tag
 from .forms import CommentForm
 from .models import Post, Comment
 
@@ -48,9 +49,9 @@ def post_detail(request, year, month, day, post):
         created_on__day=day
     )
 
-    # List of active comments for this post
     comments = post.comments.filter(is_active=True)
     form = CommentForm()
+    most_commented_posts = Post.published.most_commented()
 
     return render(
         request,
@@ -58,7 +59,8 @@ def post_detail(request, year, month, day, post):
         {
             'post': post,
             'comments': comments,
-            'form': form
+            'form': form,
+            'most_commented_posts': most_commented_posts
         }
     )
 
@@ -71,6 +73,22 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 3
     template_name = 'blog/post/list.html'
+
+    def get_queryset(self):
+        queryset = Post.published.all()
+        tag_slug = self.kwargs.get('tag_slug')
+        if tag_slug:
+            self.tag = get_object_or_404(Tag, slug=tag_slug)
+            queryset = queryset.filter(tags__in=[self.tag])
+        else:
+            self.tag = None
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.tag
+        context['most_commented_posts'] = Post.published.most_commented()
+        return context
 
 
 @login_required
