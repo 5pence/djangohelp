@@ -59,8 +59,16 @@ Welcome to the `djangohelp` repository! This project is designed to help learner
 - [Class-based generic views](https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/)
 - Also check out the PDF slides in the readme-images directory
 
-
-
 ---
 
 Happy coding! If you have any questions, feel free to open an issue.
+
+
+## Slides from Lecture
+
+![Slide One](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.001.jpeg)
+![Slide Two](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.002.jpeg)
+![Slide Three](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.003.jpeg)
+![Slide Four](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.004.jpeg)
+![Slide Five](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.005.jpeg)
+![Slide Six](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/DjangoMVT.006.jpeg)
