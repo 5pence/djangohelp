@@ -52,8 +52,11 @@ Welcome to the `djangohelp` repository! This project is designed to help learner
 - `manage.py` - Command-line utility for interacting with the project.
 
 ## Learning Resources
-- [Django Official Documentation](https://docs.djangoproject.com/en/stable/)
+- [Django Official Documentation](https://docs.djangoproject.com/en/5.0/)
 - [Tutorial: Writing your first Django app](https://docs.djangoproject.com/en/stable/intro/tutorial01/)
+- [Querysets](https://docs.djangoproject.com/en/5.0/ref/models/querysets/#methods-that-return-new-querysets)
+- [Django Template Language](https://docs.djangoproject.com/en/5.0/ref/templates/language/)
+- [Class-based generic views](https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/)
 - Also check out the PDF slides in the readme-images directory
 
 
