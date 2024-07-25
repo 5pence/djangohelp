@@ -157,3 +157,23 @@ def delete_comment(request, comment_id):
         'blog/post/comment/delete_comment.html',
         {'comment': comment}
     )
+
+
+def get_word():
+    """ This function returns a randon word """
+    word = random.choice(team_list)
+    return word.upper()
+
+def get_word():
+    """
+    This function returns a randon word
+    It uses something else
+    """
+    word = random.choice(team_list)
+    # this is a comment <-- correct!
+    return word.upper()
+
+def get_word():
+    # This function returns a randon word <---wrong not dostring
+    word = random.choice(team_list)
+    return word.upper()

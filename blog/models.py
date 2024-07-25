@@ -1,6 +1,5 @@
 """ imports """
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse
@@ -14,7 +13,6 @@ class PublishedManager(models.Manager):
     Note: All models come with a default manager - the objects manager
     for example Post.objects.all()
     """
-
     def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
