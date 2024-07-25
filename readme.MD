@@ -1,5 +1,6 @@
 # djangohelp
 
+![Site pic](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/sitepic.png)
 
 ## Introduction
 Welcome to the `djangohelp` repository! This project is designed to help learners understand the basics of Django, a powerful web framework for Python. Whether you are new to Django or looking to reinforce your skills, this repository provides a hands-on approach to learning.
