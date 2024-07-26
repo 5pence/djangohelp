@@ -3,22 +3,27 @@
 ![Site pic](https://raw.githubusercontent.com/5pence/djangohelp/main/readme-images/sitepic.png)
 
 ## Introduction
+
 Welcome to the `djangohelp` repository! This project is designed to help learners understand the basics of Django, a powerful web framework for Python. Whether you are new to Django or looking to reinforce your skills, this repository provides a hands-on approach to learning.
 
 ## Getting Started
 
 ### Prerequisites
+
 - Python 3.x installed on your machine
 - Pip (Python package installer)
 
 ### Installation
+
 1. **Clone the Repository**
+
     ```bash
     git clone https://github.com/5pence/djangohelp.git
     cd djangohelp
     ```
 
 2. **Create a Virtual Environment**
+
     ```bash
     python -m venv env
     source env/bin/activate   # On Windows, use `env\Scripts\activate`
@@ -57,12 +62,55 @@ Welcome to the `djangohelp` repository! This project is designed to help learner
 - [Querysets](https://docs.djangoproject.com/en/5.0/ref/models/querysets/#methods-that-return-new-querysets)
 - [Django Template Language](https://docs.djangoproject.com/en/5.0/ref/templates/language/)
 - [Class-based generic views](https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/)
-- Also check out the PDF slides in the readme-images directory
+- [Extending the user model](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone)
+- Also check out the PDF slides at the footer of this doc
+
+## Questions I've asked about this:
+
+### How do I do a profile
+
+You extend the Django User model, I show you how here:
+
+I usually name the Django Model as `Profile`:
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=400, blank=True)
+    location = models.CharField(max_length=25, blank=True)
+```
+
+Now define signals so my `Profile` model will be automatically created and updated when I create/update `User` instances.
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=400, blank=True)
+    location = models.CharField(max_length=25, blank=True)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+```
+
+So by hooking the `create_user_profile` and `save_user_profile` methods to the `User` model, whenever a save event occurs. This kind of signal is called `post_save`.
 
 ---
 
 Happy coding! If you have any questions, feel free to open an issue.
-
 
 ## Slides from Lecture
 

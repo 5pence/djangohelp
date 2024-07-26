@@ -13,6 +13,7 @@ class PublishedManager(models.Manager):
     Note: All models come with a default manager - the objects manager
     for example Post.objects.all()
     """
+
     def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
@@ -79,6 +80,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,

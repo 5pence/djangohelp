@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import Comment, Post
 
-# this next line is teh quick 'lazy' way that registers Post in the admin
+# this next line is the quick 'lazy' way that registers Post in the admin
 # admin.site.register(Post)
+# admin.site.register(Comment)
 
 
 @admin.register(Comment)
