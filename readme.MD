@@ -65,7 +65,41 @@ Welcome to the `djangohelp` repository! This project is designed to help learner
 - [Extending the user model](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone)
 - Also check out the PDF slides at the footer of this doc
 
-## Questions I've asked about this:
+## Questions I've asked about this
+
+### How do I install python
+
+Go here and download and install it:
+- [Python Download](https://www.python.org/downloads/)
+- Once installed properly check with `python3 --version` in command line
+
+### How do I install git on my local machine
+
+- [Git download](https://git-scm.com/downloads)
+- Once installed properly check with `git` in command line
+
+### How do I set up a virtual environment
+
+- Goto directory you want to create one
+- On Mac/Linux `python3 -m venv my_venv`
+- On Windows `py -m venv my_venv`
+Then:
+- On Mac/Linux `source my_venv/bin/activate`
+- On Windows `.\my_venv\Scripts\activate`
+The shell/command line prompt will now include your virtual environment
+`(my_venv) name/directory/on/computer:`
+
+### Now how do I create a Django project
+
+- `python3 -m pip install Django`
+You can check with:
+- `python3 -m django --version`
+And then create the actual project:
+- `django-admin startproject projectname`
+- `cd projectname`
+- `python3 manage.py migrate`
+- `python3 manage.py runserver`
+It should then tell you where to go in your browser (localhost:8000) usually and show you 'The install worked successfully screen`
 
 ### How do I do a profile
 
@@ -107,6 +141,19 @@ def save_user_profile(sender, instance, **kwargs):
 ```
 
 So by hooking the `create_user_profile` and `save_user_profile` methods to the `User` model, whenever a save event occurs. This kind of signal is called `post_save`.
+
+### How to create a 404 page
+
+- [How to create Django 404 and 500 page](https://learndjango.com/tutorials/customizing-django-404-and-500-error-pages)
+
+### How to make a ERD diagram 
+
+- Write it out and take a photo
+- Or use some app
+- Or try this - though it can be tricky at times (getting Django + extensions to draw it)
+- [Django-extensions](https://github.com/django-extensions/django-extensions)
+
+![Django extensions made this one](https://raw.githubusercontent.com/5pence/djangohelp/main/mysite_models.png)
 
 ---
 

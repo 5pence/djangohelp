@@ -47,9 +47,9 @@ class Post(models.Model):
         choices=Status,
         default=Status.DRAFT
     )
-    # the default manager
+    # the default manager   ie Post.objects.all()
     objects = models.Manager()
-    # our custom manager
+    # our custom manager   ie Post.published.all()
     published = PublishedManager()
 
     class Meta:

@@ -118,7 +118,6 @@ def post_comment(request, post_id):
 @login_required
 def edit_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id, user=request.user)
-
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
