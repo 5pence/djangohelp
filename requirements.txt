@@ -1,4 +1,10 @@
 asgiref==3.8.1
 Django==5.0.7
+django-extensions==3.2.3
 django-taggit==5.0.1
+graphqlclient==0.2.4
+graphviz==0.20.3
+pydotplus==2.0.2
+pyparsing==3.1.2
+six==1.16.0
 sqlparse==0.5.1

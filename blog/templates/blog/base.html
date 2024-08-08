@@ -12,7 +12,7 @@
     <div class="wrapper">
         <div class="content">
             <h1>
-                <a href="{% url 'blog:post_list' %}">The Inkwell Collective</a>
+                <a id="stupidJs" href="{% url 'blog:post_list' %}">The Inkwell Collective</a>
             </h1>
             {% block content %}
             {% endblock %}
@@ -50,5 +50,20 @@
             </div>
         </div>   
     </div>
+    <script href="{% static 'js/script.js' %}" rel="javascript">
+        const hoverEle = document.getElementById('stupidJs');
+
+        function addHoverStyle() {
+            hoverEle.style.backroundColor = 'orange'
+            hoverEle.style.color = 'white'
+        }
+
+        function removeHoverStyle() {
+            hoverEle.style.backroundColor = 'white'
+            hoverEle.style.color = 'black'
+        }
+        hoverEle.addEventListener('mouseenter', addHoverStyle);
+        hoverEle.addEventListener('mouseleave', removeHoverStyle);  
+    </script>
   </body>
 </html>
